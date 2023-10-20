@@ -82,3 +82,21 @@ jobs:
         run: dotnet test src/Magicodes.ExporterAndImporter.Tests -f net6.0
       - name: Test with .NET 7.0.x
         run: dotnet test src/Magicodes.ExporterAndImporter.Tests -f net7.0
+  CentOS-7:
+    name: Run on CentOS 7
+    runs-on: ubuntu-latest
+    container:
+      image: "centos:7" 
+    steps:
+      - name: 🔨 Use .NET 7.X SDK
+        uses: actions/setup-dotnet@v2.1.0
+        with:
+          dotnet-version: '7.x'
+      - name: Restore with dotnet
+        run: dotnet restore
+      - name: Build with dotnet
+        run: dotnet build -c Release --no-restore
+      - name: Test with .NET 6.0.x
+        run: dotnet test src/Magicodes.ExporterAndImporter.Tests -f net6.0
+      - name: Test with .NET 7.0.x
+        run: dotnet test src/Magicodes.ExporterAndImporter.Tests -f net7.0
